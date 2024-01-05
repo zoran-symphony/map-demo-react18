@@ -1,0 +1,148 @@
+{
+    "options": {
+        "center": [-13704397.33, 6304438.38],
+        "zoom": 13,
+        "target": "map",
+        "minZoom": 3,
+        "maxZoom": 20,
+        "moveTolerance": 7,
+        "enableFeatureHover": true,
+        "enableZoomControl": true
+    },
+    "baseLayers": [
+        {
+            "layerId": "mapbox-streets",
+            "layerType": "mapbox",
+            "styleUrl": "mapbox://styles/hitachi-powergrids/cknqm8ylu040217ofrgjf097a",
+            "accessToken": "pk.eyJ1IjoiaGl0YWNoaS1wb3dlcmdyaWRzIiwiYSI6ImNrazhzMjJscjBlNjUydW5zdDlrcHp2OWQifQ.xkmD6caBhcMQv_j_p4G4EQ",
+            "title": "map.baseLayers.mapboxStreet",
+            "image": "streetLayer",
+            "attributions": "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
+        },
+        {
+            "layerId": "mapbox-satellite",
+            "layerType": "mapbox",
+            "styleUrl": "mapbox://styles/hitachi-powergrids/ckllsh9y41sil17o9u4qs5f8y",
+            "accessToken": "pk.eyJ1IjoiaGl0YWNoaS1wb3dlcmdyaWRzIiwiYSI6ImNrazhzMjJscjBlNjUydW5zdDlrcHp2OWQifQ.xkmD6caBhcMQv_j_p4G4EQ",
+            "title": "map.baseLayers.mapboxSatellite",
+            "image": "satelliteLayer",
+            "attributions": "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
+        }
+    ],
+    "layers": [
+        {
+            "groupTitle": "map.group.squares",
+            "groupId": "squares-group",
+            "groupItems": [
+                {
+                    "layerId": "squares-layer",
+                    "layerType": "geojson",
+                    "title": "map.layers.squares.purple",
+                    "image": "map.layers.squares.purple",
+                    "source": "squares-source",
+                    "style": "squares-style",
+                    "minZoom": 13
+                }
+            ]
+        },
+        {
+            "groupTitle": "map.group.circles",
+            "groupId": "circles-group",
+            "groupItems": [
+                {
+                    "layerId": "circles-layer",
+                    "layerType": "geojson",
+                    "title": "map.layers.circles.red",
+                    "image": "map.layers.circles.red",
+                    "visible": true,
+                    "source": "circles-source",
+                    "style": "circles-style"
+                }
+            ]
+        },
+        {
+            "groupTitle": "map.group.transmission",
+            "groupId": "transmission-group",
+            "visible": false,
+            "groupItems": [
+                {
+                    "layerId": "power-lines",
+                    "layerType": "geojson",
+                    "source": "power-lines-source",
+                    "title": "map.layers.transmission.powerLines",
+                    "image": "map.layers.transmission.powerLines",
+                    "minZoom": 3,
+                    "maxZoom": 20,
+                    "visible": false
+                },
+                {
+                    "layerId": "orders",
+                    "layerType": "geojson",
+                    "source": "orders-source",
+                    "title": "map.layers.transmission.orders",
+                    "image": "map.layers.transmission.orders",
+                    "minZoom": 3,
+                    "maxZoom": 20,
+                    "visible": true
+                }
+            ]
+        }
+    ],
+    "sources": {
+        "squares-source": {
+            "sourceType": "geojson",
+            "url": "../../data/squaresExample.json"
+        },
+        "circles-source": {
+            "sourceType": "geojson",
+            "url": "../../data/circlesExample.json"
+        },
+        "orders-source": {
+            "sourceType": "geojson",
+            "url": "../../data/sampleOrderData.json"
+        },
+        "power-lines-source": {
+            "sourceType": "geojson",
+            "url": "../../data/samplePowerLineData.json"
+        }
+    },
+    "styles": {
+        "layerStyles": {
+            "squares-style": {
+                "polyStyle": {
+                    "lookup": [
+                        {
+                            "styleType": "poly",
+                            "styles": [
+                                {
+                                    "style": {
+                                        "fill": "transparent",
+                                        "outline": "rgba(25, 18, 210, 0.6)",
+                                        "outlineWidth": 5
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            "circles-style": {
+                "polyStyle": {
+                    "lookup": [
+                        {
+                            "styleType": "poly",
+                            "styles": [
+                                {
+                                    "style": {
+                                        "fill": "transparent",
+                                        "outline": "rgba(211, 50, 21, 0.9)"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
