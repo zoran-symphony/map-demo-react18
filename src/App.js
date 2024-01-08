@@ -1,38 +1,47 @@
-import { useState, useEffect } from "react";
-import logo from "./logo.svg";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import mapConfig from "./layerPickerConfig.json";
 import { LayerPicker, createMap } from "webcore-map-nextgen";
 
+window.React = React;
+
+const mapContainerStyle = {
+  flex: 3,
+  height: "600px",
+};
+
 function App() {
   const [mapInstance, setMapInstance] = useState(null);
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [isRefreshEnabled, setIsRefreshEnabled] = useState(false);
-
-  const toggleModal = () => setIsOpen((oldIsOpen) => !oldIsOpen);
+  const loadingRef = React.useRef(false);
 
   useEffect(() => {
-    createMap({ mapConfig }).then(setMapInstance);
+    const createMapAsync = async () => {
+      const map = await createMap({
+        mapConfig,
+      });
+
+      setMapInstance(map);
+      loadingRef.current = false;
+    };
+
+    if (!loadingRef.current) {
+      loadingRef.current = true;
+      createMapAsync();
+    }
+
+    return () => {
+      mapInstance?.setTarget(null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div style={{ display: "flex" }}>
+        <div id="map" style={mapContainerStyle}></div>
         <LayerPicker map={mapInstance} />
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
     </div>
   );
 }
