@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import mapConfig from "./layerPickerConfig.json";
+import "webcore-map-nextgen/webcore-map-nextgen.css";
 import { LayerPicker, createMap } from "webcore-map-nextgen";
 
 window.React = React;
